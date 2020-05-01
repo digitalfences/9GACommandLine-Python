@@ -9,6 +9,8 @@ verify_ssl = true
 peewee = "*"
 psycopg2 = "*"
 autopep8 = "*"
+pygame = "*"
+argparse = "*"
 
 [requires]
 python_version = "3.8"
