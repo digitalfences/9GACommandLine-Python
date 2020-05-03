@@ -31,9 +31,10 @@ def create(args):
 def session(args):
     print(f"beginning practice session with {args} cards")
     cards = FlashCard.select()
-    cards = sorted(cards, key=lambda i: i.times_incorrect,reverse=True)
+    cards = sorted(cards, key=lambda i: i.times_correct)
+    correct = 0
     for i in range(int(args)):
-        print(f"CARD {i}:\n")
+        print(f"CARD {i+1}:\n")
         print(cards[i].front_text)
         solution = input("TYPE SOLUTION HERE:")
         print(f"YOUR ANSWER WAS: {solution}\n")
@@ -42,12 +43,42 @@ def session(args):
         while endState != 'y' and endState != 'n':
             endState = input("WERE YOU CORRECT? (y/n):")
             if endState == 'y':
-                print("")
+                correct += 1
+                print("Updating card tally...\n")
+                cards[i].times_correct += 1
+                cards[i].save()
+                print(f"You have gotten this question correct {cards[i].times_correct} times\n")
+                print(f"You have gotten this question incorrect {cards[i].times_incorrect} times\n")
+            elif endState == 'q':
+                choice = input("Are you sure you want to quit this session?(y/n)")
+                if choice == 'y':
+                    print(f"Session ended. {correct} correct out of {args}")
+                    print("exiting...")
+                    return
+                elif choice == 'n':
+                    print("exit not authenticated")
+                else:
+                    print("error authenticating exit")
+                break
+            elif endState == 'd':
+                choice = input("Are you sure you want to delete this card?(y/n)")
+                if choice == 'y':
+                    target = FlashCard.get(FlashCard.id == cards[i].id)
+                    target.delete_instance
+                    print("card deleted")
+                elif choice == 'n':
+                    print("delete not authenticated")
+                else:
+                    print("error authenticating delete")
             elif endState != 'y' and endState != 'n':
-                print('ERROR. TYPE y OR n WITHOUT ADDITIONAL MARK:')
+                print('ERROR. TYPE y OR n WITHOUT ADDITIONAL MARK. You can also type q to leave the session or d to delete the current card:')
             else:
-                print("")
-
+                print("Updating card tally...\n")
+                cards[i].times_incorrect += 1
+                cards[i].save()
+                print(f"You have gotten this question correct {cards[i].times_correct} times\n")
+                print(f"You have gotten this question incorrect {cards[i].times_incorrect} times\n")
+    print(f"Session ended. {correct} correct out of {args}")
         
 def main(args):
     choice = "-1" 
