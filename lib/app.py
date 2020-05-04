@@ -1,9 +1,10 @@
 import argparse
+from main import seedTables 
 from peewee import *
-
+#This established database connection
 db = PostgresqlDatabase('flashcardapp', user='postgres', password='', host='localhost', port=5432)
 db.connect()
-
+#These are the models we use for the flashcards
 class BaseModel(Model):
     class Meta:
         database = db
@@ -28,11 +29,13 @@ def create(args):
         newCard.save()
         print("Card created")
 #This function will bring back a number of cards from the database to test the user
-def session(args):
-    print(f"beginning practice session with {args} cards")
+def session(args): 
     cards = FlashCard.select()
     cards = sorted(cards, key=lambda i: i.times_correct)
+    if int(args) > len (cards):
+        args = str(len(cards))
     correct = 0
+    print(f"beginning practice session with {args} cards")
     for i in range(int(args)):
         print(f"CARD {i+1}:\n")
         print(cards[i].front_text)
@@ -81,6 +84,8 @@ def session(args):
     print(f"Session ended. {correct} correct out of {args}")
         
 def main(args):
+    if len(FlashCard.select()) == 0:
+        seedTables()
     choice = "-1" 
     if args.start:
         session(args.quantity)
