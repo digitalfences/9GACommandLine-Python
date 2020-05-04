@@ -1,9 +1,7 @@
 # 9GA Command Line Python
 This is a command line application for a flash card database that the user can add to, read from, update, and delete
 
-
 ## Getting Started
-
 Repo Github: https://github.com/digitalfences/9GACommandLine-Python
 Application wil run with any virtual environment friendly to Python3.
 Basic app will run with the argument flash, as well as accepting --start or --create flags with a quantity argument
