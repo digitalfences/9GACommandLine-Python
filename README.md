@@ -33,7 +33,7 @@ Through github repository:
 
 ```
 1. Clone this repo to your computer
-2. Make sure you have python of 3.6 or later
+2. Make sure you have python of 3.6 or later and the most recent version of Postgres CLI
 3. Go into the lib dir
 4. Run `psql < settings.sql`
    - This command will create a postgreSQL database named flashcardapp on your computer
