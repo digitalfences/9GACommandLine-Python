@@ -36,7 +36,7 @@ Through github repository:
 2. Make sure you have python of 3.6 or later
 3. Go into the lib dir
 4. Run `psql < settings.sql`
-   - This command will create a postgreSQL database named flashcard on your computer
+   - This command will create a postgreSQL database named flashcardapp on your computer
 5. Run `pipenv install'
    - This command will install the dependencies packages   
 6. Run `pipenv shell` to Start your virtual environment
@@ -70,5 +70,5 @@ Deletion is implemented subtly in the start session method. When a question is b
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
-
+* Shimin Rao for his example readme https://github.com/life2free/ContactBook_CommandLine
 * GA for project guidance and instruction
