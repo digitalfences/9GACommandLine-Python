@@ -34,7 +34,13 @@ Through github repository:
 ```
 1. Clone this repo to your computer
 2. Make sure you have python of 3.6 or later
-3. run python app.py flash
+3. Go into the lib dir
+4. Run `psql < settings.sql`
+   - This command will create a postgreSQL database named flashcard on your computer
+5. Run `pipenv install'
+   - This command will install the dependencies packages   
+6. Run `pipenv shell` to Start your virtual environment
+7. Run `python3 app.py flash` to experience this command line application
 ```
 
 ### Read
